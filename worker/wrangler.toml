@@ -1,0 +1,12 @@
+name = "santeria-orders"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+[vars]
+FROM_EMAIL = "Santeria Tech Orders <orders@YOUR-VERIFIED-DOMAIN.com>"
+TO_EMAILS = "santeriatech@atomicmail.io,orders.santeriatech@yopmail.com"
+# Your GitHub Pages origin (no path), plus localhost for testing.
+ALLOWED_ORIGINS = "https://YOUR-GITHUB-USERNAME.github.io,http://localhost:5173"
+
+# Set the API key as a secret, never here:
+#   npx wrangler secret put RESEND_API_KEY

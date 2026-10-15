@@ -1,0 +1,828 @@
+[
+  {
+    "id": "iphone-duo-foldable",
+    "name": "iPhone Duo (Foldable)",
+    "category": "iphone",
+    "series": "iPhone 18 & Duo",
+    "price": 1530,
+    "hot": true,
+    "image": "https://www.apple.com/v/iphone/compare/am/images/overview/compare_iphone_duo_night_sky__l4khpo7rqpeu_large_2x.jpg",
+    "back": "https://www.apple.com/v/iphone/compare/am/images/overview/compare_iphone_duo_star_white__f2s3n9ds95ay_large_2x.jpg"
+  },
+  {
+    "id": "iphone-18-pro-max-2tb",
+    "name": "iPhone 18 Pro Max (2TB)",
+    "category": "iphone",
+    "series": "iPhone 18 & Duo",
+    "price": 1530,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301317&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-18-pro-max-colors.png"
+  },
+  {
+    "id": "iphone-18-pro-max-1tb",
+    "name": "iPhone 18 Pro Max (1TB)",
+    "category": "iphone",
+    "series": "iPhone 18 & Duo",
+    "price": 1215,
+    "hot": true,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301317&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-18-pro-max-colors.png"
+  },
+  {
+    "id": "iphone-18-pro-512gb",
+    "name": "iPhone 18 Pro (512GB)",
+    "category": "iphone",
+    "series": "iPhone 18 & Duo",
+    "price": 990,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301316&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-18-pro-colors.png"
+  },
+  {
+    "id": "iphone-18-512gb",
+    "name": "iPhone 18 (512GB)",
+    "category": "iphone",
+    "series": "iPhone 18 & Duo",
+    "price": 855,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301316&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-18-pro-colors.png"
+  },
+  {
+    "id": "iphone-18-256gb",
+    "name": "iPhone 18 (256GB)",
+    "category": "iphone",
+    "series": "iPhone 18 & Duo",
+    "price": 702,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301316&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-18-pro-colors.png"
+  },
+  {
+    "id": "iphone-air",
+    "name": "iPhone Air",
+    "category": "iphone",
+    "series": "iPhone 17 & Air",
+    "price": 855,
+    "hot": true,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301244&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-air-colors.png"
+  },
+  {
+    "id": "iphone-17-pro-max",
+    "name": "iPhone 17 Pro Max",
+    "category": "iphone",
+    "series": "iPhone 17 & Air",
+    "price": 810,
+    "hot": true,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301246&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-17-pro-max-colors.png"
+  },
+  {
+    "id": "iphone-17-pro",
+    "name": "iPhone 17 Pro",
+    "category": "iphone",
+    "series": "iPhone 17 & Air",
+    "price": 720,
+    "hot": true,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301245&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-17-pro-colors.png"
+  },
+  {
+    "id": "iphone-17",
+    "name": "iPhone 17",
+    "category": "iphone",
+    "series": "iPhone 17 & Air",
+    "price": 585,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301247&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-17-colors.png"
+  },
+  {
+    "id": "iphone-17e",
+    "name": "iPhone 17e",
+    "category": "iphone",
+    "series": "iPhone 17 & Air",
+    "price": 450,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301285&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-17e/iphone-17e-colors.png"
+  },
+  {
+    "id": "iphone-16-pro-max",
+    "name": "iPhone 16 Pro Max",
+    "category": "iphone",
+    "series": "iPhone 16",
+    "price": 675,
+    "hot": true,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301048&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-16-pro-max-colors.png"
+  },
+  {
+    "id": "iphone-16-pro",
+    "name": "iPhone 16 Pro",
+    "category": "iphone",
+    "series": "iPhone 16",
+    "price": 585,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301047&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-16-pro-colors.png"
+  },
+  {
+    "id": "iphone-16-plus",
+    "name": "iPhone 16 Plus",
+    "category": "iphone",
+    "series": "iPhone 16",
+    "price": 495,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301046&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-16-plus-colors.png"
+  },
+  {
+    "id": "iphone-16",
+    "name": "iPhone 16",
+    "category": "iphone",
+    "series": "iPhone 16",
+    "price": 432,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301045&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-16-colors.png"
+  },
+  {
+    "id": "iphone-16e",
+    "name": "iPhone 16e",
+    "category": "iphone",
+    "series": "iPhone 16",
+    "price": 342,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301076&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-16e/iphone-16e-colors.png"
+  },
+  {
+    "id": "iphone-15-pro-max",
+    "name": "iPhone 15 Pro Max",
+    "category": "iphone",
+    "series": "iPhone 15",
+    "price": 558,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301003&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/fall-2023-iphone-colors-iphone-15-pro-max.png"
+  },
+  {
+    "id": "iphone-15-pro",
+    "name": "iPhone 15 Pro",
+    "category": "iphone",
+    "series": "iPhone 15",
+    "price": 486,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300993&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/fall-2023-iphone-colors-iphone-15-pro.png"
+  },
+  {
+    "id": "iphone-15-plus",
+    "name": "iPhone 15 Plus",
+    "category": "iphone",
+    "series": "iPhone 15",
+    "price": 414,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301004&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/fall-2023-iphone-colors-iphone-15-plus.png"
+  },
+  {
+    "id": "iphone-15",
+    "name": "iPhone 15",
+    "category": "iphone",
+    "series": "iPhone 15",
+    "price": 360,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300991&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/fall-2023-iphone-colors-iphone-15.png"
+  },
+  {
+    "id": "iphone-14-pro-max",
+    "name": "iPhone 14 Pro Max",
+    "category": "iphone",
+    "series": "iPhone 14",
+    "price": 432,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300881&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-14-pro-max-colors.png"
+  },
+  {
+    "id": "iphone-14-pro",
+    "name": "iPhone 14 Pro",
+    "category": "iphone",
+    "series": "iPhone 14",
+    "price": 378,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300880&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-14-pro-colors.png"
+  },
+  {
+    "id": "iphone-14-plus",
+    "name": "iPhone 14 Plus",
+    "category": "iphone",
+    "series": "iPhone 14",
+    "price": 315,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300879&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-14-plus-colors-spring-2023.png"
+  },
+  {
+    "id": "iphone-14",
+    "name": "iPhone 14",
+    "category": "iphone",
+    "series": "iPhone 14",
+    "price": 270,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300878&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-14-colors-spring-2023.png"
+  },
+  {
+    "id": "iphone-13-pro-max",
+    "name": "iPhone 13 Pro Max",
+    "category": "iphone",
+    "series": "iPhone 13",
+    "price": 342,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300430&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/2022-spring-iphone13-pro-max-colors.png"
+  },
+  {
+    "id": "iphone-13-pro",
+    "name": "iPhone 13 Pro",
+    "category": "iphone",
+    "series": "iPhone 13",
+    "price": 297,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300429&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/2022-spring-iphone13-pro-colors.png"
+  },
+  {
+    "id": "iphone-13-mini",
+    "name": "iPhone 13 mini",
+    "category": "iphone",
+    "series": "iPhone 13",
+    "price": 216,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300426&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/2022-iphone13-mini-colors.png"
+  },
+  {
+    "id": "iphone-13",
+    "name": "iPhone 13",
+    "category": "iphone",
+    "series": "iPhone 13",
+    "price": 234,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300428&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/2022-spring-iphone13-colors.png"
+  },
+  {
+    "id": "iphone-12-pro-max",
+    "name": "iPhone 12 Pro Max",
+    "category": "iphone",
+    "series": "iPhone 12",
+    "price": 252,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300240&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-12-pro-max/iphone12-pro-max-colors.jpg"
+  },
+  {
+    "id": "iphone-12-pro",
+    "name": "iPhone 12 Pro",
+    "category": "iphone",
+    "series": "iPhone 12",
+    "price": 216,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300242&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-12-pro/iphone12-pro-colors.jpg"
+  },
+  {
+    "id": "iphone-12-mini",
+    "name": "iPhone 12 mini",
+    "category": "iphone",
+    "series": "iPhone 12",
+    "price": 153,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300239&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/2021-iphone12-mini-colors.png"
+  },
+  {
+    "id": "iphone-12",
+    "name": "iPhone 12",
+    "category": "iphone",
+    "series": "iPhone 12",
+    "price": 171,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300241&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/2021-iphone12-colors.png"
+  },
+  {
+    "id": "iphone-11-pro-max",
+    "name": "iPhone 11 Pro Max",
+    "category": "iphone",
+    "series": "iPhone 11",
+    "price": 162,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=507845&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/identify-iphone-11pro-max.jpg"
+  },
+  {
+    "id": "iphone-11-pro",
+    "name": "iPhone 11 Pro",
+    "category": "iphone",
+    "series": "iPhone 11",
+    "price": 135,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=507808&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/identify-iphone-11pro.jpg"
+  },
+  {
+    "id": "iphone-11",
+    "name": "iPhone 11",
+    "category": "iphone",
+    "series": "iPhone 11",
+    "price": 108,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=507882&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/identify-iphone-11-colors.jpg"
+  },
+  {
+    "id": "iphone-se-3rd-gen",
+    "name": "iPhone SE (3rd Gen)",
+    "category": "iphone",
+    "series": "iPhone SE",
+    "price": 144,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300865&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-se-3rd-gen-colors.png"
+  },
+  {
+    "id": "iphone-se-2nd-gen-2020",
+    "name": "iPhone SE (2nd Gen / 2020)",
+    "category": "iphone",
+    "series": "iPhone SE",
+    "price": 81,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=509370&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/iphone/iphone-se/iphone-se-2nd-gen-colors.jpg"
+  },
+  {
+    "id": "ipad-pro-13in-m4",
+    "name": "iPad Pro 13\" (M4)",
+    "category": "ipad",
+    "series": "iPad Pro",
+    "price": 900,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301033&size=640x640"
+  },
+  {
+    "id": "ipad-pro-11in-m4",
+    "name": "iPad Pro 11\" (M4)",
+    "category": "ipad",
+    "series": "iPad Pro",
+    "price": 702,
+    "hot": true,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301031&size=640x640"
+  },
+  {
+    "id": "ipad-pro-12-9in-m2-6th-gen",
+    "name": "iPad Pro 12.9\" (M2 - 6th Gen)",
+    "category": "ipad",
+    "series": "iPad Pro",
+    "price": 612,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300908&size=640x640"
+  },
+  {
+    "id": "ipad-pro-11in-m2-4th-gen",
+    "name": "iPad Pro 11\" (M2 - 4th Gen)",
+    "category": "ipad",
+    "series": "iPad Pro",
+    "price": 468,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300905&size=640x640"
+  },
+  {
+    "id": "ipad-pro-12-9in-m1-5th-gen",
+    "name": "iPad Pro 12.9\" (M1 - 5th Gen)",
+    "category": "ipad",
+    "series": "iPad Pro",
+    "price": 459,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300349&size=640x640"
+  },
+  {
+    "id": "ipad-pro-11in-m1-3rd-gen",
+    "name": "iPad Pro 11\" (M1 - 3rd Gen)",
+    "category": "ipad",
+    "series": "iPad Pro",
+    "price": 360,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300346&size=640x640"
+  },
+  {
+    "id": "ipad-pro-12-9in-2020-a12z",
+    "name": "iPad Pro 12.9\" (2020 - A12Z)",
+    "category": "ipad",
+    "series": "iPad Pro",
+    "price": 324,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=509192&size=640x640"
+  },
+  {
+    "id": "ipad-pro-11in-2020-a12z",
+    "name": "iPad Pro 11\" (2020 - A12Z)",
+    "category": "ipad",
+    "series": "iPad Pro",
+    "price": 261,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=509181&size=640x640"
+  },
+  {
+    "id": "ipad-pro-12-9in-2018-a12x",
+    "name": "iPad Pro 12.9\" (2018 - A12X)",
+    "category": "ipad",
+    "series": "iPad Pro",
+    "price": 270,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=506047&size=640x640"
+  },
+  {
+    "id": "ipad-pro-11in-2018-a12x",
+    "name": "iPad Pro 11\" (2018 - A12X)",
+    "category": "ipad",
+    "series": "iPad Pro",
+    "price": 216,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=506083&size=640x640"
+  },
+  {
+    "id": "ipad-air-13in-m2",
+    "name": "iPad Air 13\" (M2)",
+    "category": "ipad",
+    "series": "iPad Air",
+    "price": 558,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301029&size=640x640"
+  },
+  {
+    "id": "ipad-air-11in-m2",
+    "name": "iPad Air 11\" (M2)",
+    "category": "ipad",
+    "series": "iPad Air",
+    "price": 432,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301027&size=640x640"
+  },
+  {
+    "id": "ipad-air-5th-gen-m1",
+    "name": "iPad Air 5th Gen (M1)",
+    "category": "ipad",
+    "series": "iPad Air",
+    "price": 315,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300866&size=640x640"
+  },
+  {
+    "id": "ipad-air-4th-gen-2020",
+    "name": "iPad Air 4th Gen (2020)",
+    "category": "ipad",
+    "series": "iPad Air",
+    "price": 225,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300202&size=640x640"
+  },
+  {
+    "id": "ipad-air-3rd-gen-2019",
+    "name": "iPad Air 3rd Gen (2019)",
+    "category": "ipad",
+    "series": "iPad Air",
+    "price": 117,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=506739&size=640x640"
+  },
+  {
+    "id": "ipad-10th-gen-2022",
+    "name": "iPad 10th Gen (2022)",
+    "category": "ipad",
+    "series": "iPad",
+    "price": 234,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300902&size=640x640"
+  },
+  {
+    "id": "ipad-9th-gen-2021",
+    "name": "iPad 9th Gen (2021)",
+    "category": "ipad",
+    "series": "iPad",
+    "price": 153,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300423&size=640x640"
+  },
+  {
+    "id": "ipad-8th-gen-2020",
+    "name": "iPad 8th Gen (2020)",
+    "category": "ipad",
+    "series": "iPad",
+    "price": 108,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300200&size=640x640"
+  },
+  {
+    "id": "ipad-7th-gen-2019",
+    "name": "iPad 7th Gen (2019)",
+    "category": "ipad",
+    "series": "iPad",
+    "price": 81,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=507974&size=640x640"
+  },
+  {
+    "id": "ipad-mini-7-a17-pro",
+    "name": "iPad mini 7 (A17 Pro)",
+    "category": "ipad",
+    "series": "iPad mini",
+    "price": 351,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301063&size=640x640"
+  },
+  {
+    "id": "ipad-mini-6-2021",
+    "name": "iPad mini 6 (2021)",
+    "category": "ipad",
+    "series": "iPad mini",
+    "price": 252,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300425&size=640x640"
+  },
+  {
+    "id": "ipad-mini-5-2019",
+    "name": "iPad mini 5 (2019)",
+    "category": "ipad",
+    "series": "iPad mini",
+    "price": 108,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=506704&size=640x640"
+  },
+  {
+    "id": "macbook-pro-16in-m3-max-pro",
+    "name": "MacBook Pro 16\" (M3 Max / Pro)",
+    "category": "mac",
+    "series": "MacBook Pro",
+    "price": 1710,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-pro/macbook-pro-16in-m3-pro-m3-max-nov-2023-silver-space-black.png"
+  },
+  {
+    "id": "macbook-pro-14in-m3-pro",
+    "name": "MacBook Pro 14\" (M3 / Pro)",
+    "category": "mac",
+    "series": "MacBook Pro",
+    "price": 1125,
+    "hot": true,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-pro/macbook-pro-14in-m3-pro-m3-max-nov-2023-silver-space-black.png"
+  },
+  {
+    "id": "macbook-pro-16in-m2-max-pro",
+    "name": "MacBook Pro 16\" (M2 Max / Pro)",
+    "category": "mac",
+    "series": "MacBook Pro",
+    "price": 1350,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-pro/macbook-pro-16in-2023.png"
+  },
+  {
+    "id": "macbook-pro-14in-m2-pro",
+    "name": "MacBook Pro 14\" (M2 / Pro)",
+    "category": "mac",
+    "series": "MacBook Pro",
+    "price": 990,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-pro/macbook-pro-14in-2023.png"
+  },
+  {
+    "id": "macbook-pro-16in-m1-max-pro",
+    "name": "MacBook Pro 16\" (M1 Max / Pro)",
+    "category": "mac",
+    "series": "MacBook Pro",
+    "price": 1080,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-pro/macbook-pro-2021-16in.png"
+  },
+  {
+    "id": "macbook-pro-14in-m1-pro-max",
+    "name": "MacBook Pro 14\" (M1 Pro / Max)",
+    "category": "mac",
+    "series": "MacBook Pro",
+    "price": 810,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-pro/macbook-pro-2021-14in.png"
+  },
+  {
+    "id": "macbook-pro-13in-m2-2022",
+    "name": "MacBook Pro 13\" (M2, 2022)",
+    "category": "mac",
+    "series": "MacBook Pro",
+    "price": 585,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-pro/macbook-pro-13-in-M2-2022.png"
+  },
+  {
+    "id": "macbook-pro-13in-m1-2020",
+    "name": "MacBook Pro 13\" (M1, 2020)",
+    "category": "mac",
+    "series": "MacBook Pro",
+    "price": 432,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-pro/macbook-pro-2020-late-13in-device.jpg"
+  },
+  {
+    "id": "macbook-pro-16in-2019-intel-i7-i9",
+    "name": "MacBook Pro 16\" (2019 Intel i7/i9)",
+    "category": "mac",
+    "series": "MacBook Pro",
+    "price": 288,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-pro/macbook-pro-16in-2019.jpg"
+  },
+  {
+    "id": "macbook-pro-13in-2019-intel-4-port",
+    "name": "MacBook Pro 13\" (2019 Intel 4-Port)",
+    "category": "mac",
+    "series": "MacBook Pro",
+    "price": 198,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-pro/macbook-pro-2018-13in-device.jpg"
+  },
+  {
+    "id": "macbook-air-15in-m3-2024",
+    "name": "MacBook Air 15\" (M3, 2024)",
+    "category": "mac",
+    "series": "MacBook Air",
+    "price": 882,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-air/2024-macbook-air-15in-m3-colors.png"
+  },
+  {
+    "id": "macbook-air-15in-m2-2023",
+    "name": "MacBook Air 15\" (M2, 2023)",
+    "category": "mac",
+    "series": "MacBook Air",
+    "price": 765,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-air/2023-macbook-air-15in-m2-colors.png"
+  },
+  {
+    "id": "macbook-air-13in-m3-2024",
+    "name": "MacBook Air 13\" (M3, 2024)",
+    "category": "mac",
+    "series": "MacBook Air",
+    "price": 738,
+    "hot": true,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-air/2024-macbook-air-13in-m3-colors.png"
+  },
+  {
+    "id": "macbook-air-13in-m2-2022",
+    "name": "MacBook Air 13\" (M2, 2022)",
+    "category": "mac",
+    "series": "MacBook Air",
+    "price": 612,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-air/2022-macbook-air-m2-colors.png"
+  },
+  {
+    "id": "macbook-air-13in-m1-2020",
+    "name": "MacBook Air 13\" (M1, 2020)",
+    "category": "mac",
+    "series": "MacBook Air",
+    "price": 324,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-air/macbook-air-2020-late-device.jpg"
+  },
+  {
+    "id": "macbook-air-13in-2019-intel",
+    "name": "MacBook Air 13\" (2019 Intel)",
+    "category": "mac",
+    "series": "MacBook Air",
+    "price": 162,
+    "image": "https://cdsassets.apple.com/live/7WUAS350/images/macbook-air/macbook-air-2018-device.jpg"
+  },
+  {
+    "id": "macbook-neo",
+    "name": "MacBook Neo",
+    "category": "mac",
+    "series": "MacBook Neo",
+    "price": 522,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301292&size=640x640",
+    "zoom": 1.45
+  },
+  {
+    "id": "apple-vision-pro",
+    "name": "Apple Vision Pro",
+    "category": "vision",
+    "series": "Vision Pro",
+    "price": 1890,
+    "hot": true,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301017&size=640x640",
+    "back": "https://cdsassets.apple.com/content/services/pub/image?productid=301269&size=640x640"
+  },
+  {
+    "id": "airpods-max",
+    "name": "AirPods Max",
+    "category": "airpods",
+    "series": "AirPods Max",
+    "price": 288,
+    "hot": true,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300273&size=640x640"
+  },
+  {
+    "id": "airpods-pro-2nd-gen",
+    "name": "AirPods Pro (2nd Gen)",
+    "category": "airpods",
+    "series": "AirPods Pro",
+    "price": 126,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300882&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/airpods/airpods-pro-magsafe-charging-case-2nd-generation.png"
+  },
+  {
+    "id": "airpods-pro-1st-gen",
+    "name": "AirPods Pro (1st Gen)",
+    "category": "airpods",
+    "series": "AirPods Pro",
+    "price": 63,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300145&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/airpods/airpods-pro-charging-case-magsafe-charging-case.png"
+  },
+  {
+    "id": "airpods-3rd-gen",
+    "name": "AirPods (3rd Gen)",
+    "category": "airpods",
+    "series": "AirPods",
+    "price": 81,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300453&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/airpods/airpods-lightning-charging-case-magsafe-charging-case-3rd-generation.png"
+  },
+  {
+    "id": "airpods-2nd-gen",
+    "name": "AirPods (2nd Gen)",
+    "category": "airpods",
+    "series": "AirPods",
+    "price": 36,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300121&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/airpods/airpods-wireless-charging-case.png"
+  },
+  {
+    "id": "apple-watch-ultra-2",
+    "name": "Apple Watch Ultra 2",
+    "category": "watch",
+    "series": "Ultra",
+    "price": 450,
+    "hot": true,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=301002&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/apple-watch/apple-watch-ultra-2-colors.png"
+  },
+  {
+    "id": "apple-watch-ultra-1",
+    "name": "Apple Watch Ultra 1",
+    "category": "watch",
+    "series": "Ultra",
+    "price": 342,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=300895&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/apple-watch/fall-2022-apple-watch-ultra.png"
+  },
+  {
+    "id": "apple-watch-series-10",
+    "name": "Apple Watch Series 10",
+    "category": "watch",
+    "series": "Series",
+    "price": 252,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=PL213&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/apple-watch/apple-watch-series-10-aluminum-gps.png"
+  },
+  {
+    "id": "apple-watch-series-9",
+    "name": "Apple Watch Series 9",
+    "category": "watch",
+    "series": "Series",
+    "price": 198,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=PL207&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/apple-watch/apple-watch-series-9-gps.png"
+  },
+  {
+    "id": "apple-watch-series-8",
+    "name": "Apple Watch Series 8",
+    "category": "watch",
+    "series": "Series",
+    "price": 144,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=PL293&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/apple-watch/fall-2022-watch-series8-aluminum-gps.png"
+  },
+  {
+    "id": "apple-watch-series-7",
+    "name": "Apple Watch Series 7",
+    "category": "watch",
+    "series": "Series",
+    "price": 108,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=PL194&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/apple-watch/2021-apple-watch-series7-aluminum-gps.png"
+  },
+  {
+    "id": "apple-watch-series-6",
+    "name": "Apple Watch Series 6",
+    "category": "watch",
+    "series": "Series",
+    "price": 81,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=PL291&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/apple-watch/apple-watch-series6-aluminum-gps-colors.png"
+  },
+  {
+    "id": "apple-watch-series-5-2019",
+    "name": "Apple Watch Series 5 (2019)",
+    "category": "watch",
+    "series": "Series",
+    "price": 58.5,
+    "image": "https://cdsassets.apple.com/content/services/pub/image?productid=PL206&size=640x640",
+    "back": "https://cdsassets.apple.com/live/7WUAS350/images/apple-watch/series5-apple-watch-aluminum-gps.png"
+  },
+  {
+    "id": "apple-pencil-pro",
+    "name": "Apple Pencil Pro",
+    "category": "accessories",
+    "series": "Apple Pencil",
+    "price": 72,
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MX2D3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=aERwRkppV2pTZWx2MDU5ek9FWVpkd2tuVHYzMERCZURia3c5SzJFOTlPamtyK21QQVlqVGgrcGQ5Uy9BWWRGOUU5TjEzNDVxWGZyenF5K251RnVTZXc",
+    "tilt": true
+  },
+  {
+    "id": "apple-pencil-2nd-gen",
+    "name": "Apple Pencil (2nd Gen)",
+    "category": "accessories",
+    "series": "Apple Pencil",
+    "price": 63,
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MU8F2?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=L1VmMUh5SDdMT3hqbTdraXdQb3JSUWtuVHYzMERCZURia3c5SzJFOTlPaGs0L0NuK3FMQUlmekpVaFVHWXZKQ2duMVUwMDdhR2NIUGFBTk5SLzRpdHc",
+    "tilt": true
+  },
+  {
+    "id": "apple-pencil-1st-gen",
+    "name": "Apple Pencil (1st Gen)",
+    "category": "accessories",
+    "series": "Apple Pencil",
+    "price": 31.5,
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MK0C2?wid=1144&hei=1144&fmt=jpeg&qlt=95&.v=aFZqOVJPUDVhMWVCMjZieWRpbmxhQWtuVHYzMERCZURia3c5SzJFOTlPaGVBUHpRb0JWZXpidUdrRFd6dlN6Rllva1B1Wko0S1gyU3pMSkJpeDdLc0E",
+    "tilt": true
+  },
+  {
+    "id": "magic-keyboard-for-ipad-pro-13-12-9in",
+    "name": "Magic Keyboard for iPad Pro 13/12.9\"",
+    "category": "accessories",
+    "series": "Magic Keyboard",
+    "price": 162,
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MWR53?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=OXYxY21tcU9rV3ppWFozVW5zeEExd2tuVHYzMERCZURia3c5SzJFOTlPZ1pzK2NwN0lUNk9teEkzbHhVNjBDZUxIaURGN0xNeS85ekg0T1I4ZStuZlE"
+  },
+  {
+    "id": "magic-keyboard-for-ipad-pro-11in-air",
+    "name": "Magic Keyboard for iPad Pro 11\" / Air",
+    "category": "accessories",
+    "series": "Magic Keyboard",
+    "price": 135,
+    "image": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MWR03?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=bm82YzVKSzZPWXNFeFN6aHN2NDkxQWtuVHYzMERCZURia3c5SzJFOTlPZ1pzK2NwN0lUNk9teEkzbHhVNjBDZWlqQjRwTllod08vMDNMZm02SFBRS2c"
+  }
+]
