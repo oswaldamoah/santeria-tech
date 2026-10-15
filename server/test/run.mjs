@@ -144,6 +144,14 @@ assert.match(j.settings.RESEND_API_KEY, /MISSING/)
 assert.equal(cleanDatabaseUrl(`psql 'postgresql://u:p@ep-x.neon.tech/neondb?sslmode=require'`), 'postgresql://u:p@ep-x.neon.tech/neondb?sslmode=require')
 assert.throws(() => cleanDatabaseUrl('neondb_owner'), /should start with postgresql/)
 
+// Wildcard origins (Vercel preview addresses)
+const vEnv = { ...env, ALLOWED_ORIGINS: 'https://me.github.io,https://santeria-tech*.vercel.app' }
+const vcall = (origin) => app.fetch(new Request('https://api.test/admin/orders', { headers: { Origin: origin } }), vEnv).then((r) => r.status)
+assert.equal(await vcall('https://santeria-tech.vercel.app'), 401)
+assert.equal(await vcall('https://santeria-tech-git-main-oswald.vercel.app'), 401)
+assert.equal(await vcall('https://evil.vercel.app'), 403)
+assert.equal(await vcall('https://santeria-tech.vercel.app.evil.com'), 403)
+
 // Settings still holding the example's YOUR-… placeholders count as not set
 const placeholderEnv = { ...env, ALLOWED_ORIGINS: 'https://YOUR-GITHUB-USERNAME.github.io,http://localhost:5173', FROM_EMAIL: 'Santeria Tech Orders <orders@YOUR-VERIFIED-DOMAIN.com>', SITE_URL: 'https://YOUR-GITHUB-USERNAME.github.io/santeria-tech/' }
 emails.length = 0

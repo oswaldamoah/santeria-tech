@@ -45,7 +45,7 @@ Open http://localhost:5173. It uses the API you deployed (from `VITE_API_URL` in
 
 ## Change your details
 
-Everything a visitor sees about the business lives in `src/config.ts`: name, email, phone, address, the 12-hour promise and the "prices as of" month. The phone number is a placeholder (`(713) 555-0100`). Replace it, or set it to `''` to hide it everywhere.
+Everything a visitor sees about the business lives in `src/config.ts`: name, email, phone, address, the 12-hour promise and the "prices as of" month. To hide the phone number everywhere, set it to `''`.
 
 ## Your price list (Santeria Tech Prices.xlsx)
 
@@ -145,6 +145,17 @@ If sign-in fails, the dashboard tells you why in plain words: wrong email or pas
 The site appears at `https://<username>.github.io/<repo>/`. It uses hash URLs (`/#/sell/iphone`), so it works from any repository name and page refreshes never 404. For a custom domain, put the domain in `public/CNAME` and set it under **Settings > Pages**; the next deploy picks it up for `SITE_URL` and `ALLOWED_ORIGINS` if those are empty.
 
 Your `.env` and `.xlsx` files are ignored by git on purpose: one has your keys, the other your margins, and this repository may be public.
+
+## Also on Vercel
+
+The site builds on Vercel as it is (Vercel detects Vite). It just needs to know where the API is:
+
+1. In Vercel, open the project, then **Settings > Environment Variables**.
+2. Add `VITE_API_URL` with the same value as in your `.env` (your `https://…workers.dev` address), for Production and Preview. That's the only one Vercel needs. The private keys stay in `.env` and are uploaded to the API by `npm run deploy`, never to Vercel.
+3. **Deployments**, then on the latest one **⋯ > Redeploy**. (Variables only apply to new builds.)
+4. Make sure your Vercel address is in `ALLOWED_ORIGINS` in `.env`, then run `npm run deploy:api`. A `*` matches any one part of an address, so `https://santeria-tech*.vercel.app` covers your Vercel address and its preview links.
+
+After that, pushing to GitHub updates Vercel by itself. `npm run deploy` is still how you publish the API and the GitHub Pages copy.
 
 ## Project layout
 

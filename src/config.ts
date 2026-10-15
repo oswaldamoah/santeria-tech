@@ -3,7 +3,7 @@ export const site = {
   name: 'Santeria Tech',
   email: 'santeriatech@atomicmail.io',
   /** Shown as written. Leave empty ('') to hide the phone number everywhere. */
-  phone: '(713) 555-0100',
+  phone: '(832) 454-6569',
   address: {
     street: 'Williams Tell St',
     city: 'Houston',

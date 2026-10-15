@@ -84,10 +84,18 @@ interface Payload {
 
 const clip = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : '')
 
+/** "https://santeria-tech-*.vercel.app" style entries match any one subdomain label there. */
+function originAllowed(origin: string, entry: string) {
+  const e = entry.replace(/\/+$/, '').toLowerCase()
+  if (!e.includes('*')) return e === origin.toLowerCase()
+  const re = new RegExp(`^${e.split('*').map((part) => part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('[a-z0-9-]*')}$`)
+  return re.test(origin.toLowerCase())
+}
+
 function corsHeaders(origin: string | null, env: Env, open = false) {
   const allowed = settings(env).allowedOrigins.split(',').map((s) => s.trim()).filter(Boolean)
   const any = allowed.includes('*')
-  const ok = open || any || (!!origin && allowed.includes(origin))
+  const ok = open || any || (!!origin && allowed.some((a) => originAllowed(origin, a)))
   return {
     ok,
     headers: {
