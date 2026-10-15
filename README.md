@@ -188,3 +188,33 @@ wrangler.toml           tells Cloudflare where the API code is (no settings in i
 ## Motion and accessibility
 
 Animations use critically damped springs by default, with a little bounce only where something is thrown (items flying into the bag, the bag icon catching them). The bag sheet can be flicked closed on phones. Everything respects the system's Reduce Motion, Reduce Transparency and Increase Contrast settings.
+
+
+
+## Setting up new domain with santeriatech API
+
+**1. Connect the domain to wherever the site is hosted.**
+- **Vercel:** open your project's **Settings > Domains**, add the domain, and copy the DNS records it shows into the place you bought the domain.
+- **GitHub Pages:** open your repo's **Settings > Pages > Custom domain**. Also put the domain on a single line in `public/CNAME`; otherwise the next `npm run deploy` will remove it.
+
+**2. Edit two lines in `.env`:**
+
+```
+SITE_URL=https://santeriatech.com/
+ALLOWED_ORIGINS=https://santeriatech.com,https://www.santeriatech.com,https://santeriatech.vercel.app,https://santeriatech-*.vercel.app,https://oswaldamoah.github.io,http://localhost:5173
+```
+
+- **`ALLOWED_ORIGINS`** lists the sites allowed to send orders and open the dashboard. Each entry must start with `https://` and stop at the domain: no slash and nothing after it. List both the plain and the `www.` versions, since visitors can arrive on either. Keep the old addresses too if you still want them to work.
+- **`SITE_URL`** is where the "Open in dashboard" button in your order emails points.
+
+**3. Upload the change:**
+
+```
+npm run deploy:api
+```
+
+**4. Check it.** Open `https://santeria-orders.oswaldamoah00.workers.dev/` in your browser. The `ALLOWED_ORIGINS` line should show your new domain.
+
+You don't need to change anything in Vercel's Environment Variables. `VITE_API_URL` is the API's address, and that stays the same whatever domain the site uses.
+
+Once you own a domain, you can also verify it in Resend (**Domains**, then add the DNS records it gives you). Then set `FROM_EMAIL=Santeria Tech <orders@santeriatech.com>` and run `npm run deploy:api` again. Until you do that, Resend only delivers order emails to the address you signed up to Resend with.
