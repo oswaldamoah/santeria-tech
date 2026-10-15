@@ -27,6 +27,7 @@ import {
   ago,
   api,
   getSession,
+  lastEmail,
   money,
   replyClock,
   setSession,
@@ -42,6 +43,7 @@ const spring = { type: 'spring', bounce: 0, duration: 0.4 } as const
 /* ---------------- Sign in ---------------- */
 
 function Login({ onDone }: { onDone: () => void }) {
+  const [email, setEmail] = useState(lastEmail)
   const [password, setPassword] = useState('')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
@@ -51,7 +53,7 @@ function Login({ onDone }: { onDone: () => void }) {
     setBusy(true)
     setError('')
     try {
-      setSession(await api.login(password))
+      setSession(await api.login(email.trim(), password))
       onDone()
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not sign in.')
@@ -73,14 +75,28 @@ function Login({ onDone }: { onDone: () => void }) {
         <h1>{site.name} orders</h1>
         <p>Sign in to see and manage purchase orders.</p>
         <label className="adm-field">
+          <span className="sr-only">Email</span>
+          <input
+            type="email"
+            name="email"
+            autoComplete="username"
+            inputMode="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoFocus={!email}
+          />
+        </label>
+        <label className="adm-field">
           <span className="sr-only">Password</span>
           <input
             type="password"
+            name="password"
             autoComplete="current-password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            autoFocus
+            autoFocus={!!email}
           />
         </label>
         {error && (
@@ -88,7 +104,7 @@ function Login({ onDone }: { onDone: () => void }) {
             <AlertCircle size={16} /> {error}
           </div>
         )}
-        <button className="btn btn-primary btn-block" disabled={!password || busy}>
+        <button className="btn btn-primary btn-block" disabled={!email.trim() || !password || busy}>
           {busy ? <LoaderCircle className="adm-spin" size={18} /> : 'Sign in'}
         </button>
         <Link to="/" className="adm-back">
@@ -429,6 +445,7 @@ type Filter = 'all' | 'overdue' | Status
 
 function Dashboard({ onSignOut }: { onSignOut: () => void }) {
   const navigate = useNavigate()
+  const user = getSession()?.user
   const match = useMatch('/admin/orders/:code')
   const openCode = match?.params.code
   const [filter, setFilter] = useState<Filter>('all')
@@ -545,7 +562,8 @@ function Dashboard({ onSignOut }: { onSignOut: () => void }) {
           <button className="icon-btn" onClick={exportCsv} aria-label="Download all orders as CSV" title="Download CSV">
             <Download size={17} />
           </button>
-          <button className="icon-btn" onClick={onSignOut} aria-label="Sign out" title="Sign out">
+          {user && <span className="adm-user">{user.name || user.email}</span>}
+          <button className="icon-btn" onClick={onSignOut} aria-label="Sign out" title={user ? `Sign out ${user.email}` : 'Sign out'}>
             <LogOut size={17} />
           </button>
         </div>
@@ -689,7 +707,7 @@ export default function AdminApp() {
   }, [])
 
   const signOut = useCallback(() => {
-    setSession(null)
+    void api.logout().catch(() => {}).finally(() => setSession(null))
     setSignedIn(false)
   }, [])
 
@@ -699,8 +717,9 @@ export default function AdminApp() {
         <div className="adm-login-card">
           <h1>Almost there</h1>
           <p>
-            The dashboard talks to your Cloudflare Worker. Deploy it (see the README), then put its address in{' '}
-            <code>apiUrl</code> in <code>src/config.ts</code> or the <code>VITE_API_URL</code> GitHub variable.
+            The dashboard talks to your API. Fill in <code>.env</code> (see <code>.env.example</code>) and run{' '}
+            <code>npm run deploy</code>. It publishes the API, saves its address as <code>VITE_API_URL</code> and rebuilds this
+            site.
           </p>
         </div>
       </div>

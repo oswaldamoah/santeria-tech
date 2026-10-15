@@ -14,14 +14,14 @@ export const site = {
   /** Month the price list was last updated. */
   pricesUpdated: 'October 2026',
   /**
-   * Address of your Cloudflare Worker (see worker/ and the README), e.g. "https://santeria-orders.you.workers.dev".
+   * Address of your API (server/), e.g. "https://santeria-orders.you.workers.dev". npm run deploy fills it in.
    * It saves purchase orders to Neon, emails them through Resend, serves prices from your
-   * Google Sheet and powers the dashboard. Set VITE_API_URL as a GitHub repository variable, or paste it here.
+   * Google Sheet and powers the dashboard. Comes from VITE_API_URL in .env.
    */
   apiUrl: ((import.meta.env.VITE_API_URL || import.meta.env.VITE_ORDER_ENDPOINT || '') as string).replace(/\/+$/, ''),
   /**
    * Only used if apiUrl is empty: a "Publish to web" link to the Site Prices tab, read straight from the browser.
-   * With apiUrl set, the worker reads your sheet privately instead.
+   * With apiUrl set, the API reads your sheet privately instead.
    */
   priceSheetUrl: (import.meta.env.VITE_PRICE_SHEET_URL as string | undefined) || '',
 }

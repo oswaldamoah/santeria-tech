@@ -1,0 +1,8 @@
+# The website's server side (orders, emails, prices, dashboard), hosted free on Cloudflare.
+# You don't edit this. Settings live in .env, and `npm run deploy` uploads them.
+name = "santeria-orders"
+main = "server/index.ts"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+# Keeps settings uploaded by `npm run deploy` when the code is redeployed.
+keep_vars = true

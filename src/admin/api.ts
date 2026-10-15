@@ -64,17 +64,38 @@ export interface Stats {
 
 const KEY = 'santeria-admin-session'
 
-export function getSession(): { token: string; expires: number } | null {
+export interface AdminUser {
+  email: string
+  name: string
+}
+
+export interface Session {
+  token: string
+  expires: number
+  user?: AdminUser
+}
+
+export function getSession(): Session | null {
   try {
-    const s = JSON.parse(localStorage.getItem(KEY) ?? 'null') as { token: string; expires: number } | null
+    const s = JSON.parse(localStorage.getItem(KEY) ?? 'null') as Session | null
     return s && s.expires > Date.now() ? s : null
   } catch {
     return null
   }
 }
 
-export function setSession(s: { token: string; expires: number } | null) {
+/** The last email that signed in on this device, to prefill the form. */
+export function lastEmail() {
   try {
+    return localStorage.getItem(`${KEY}-email`) ?? ''
+  } catch {
+    return ''
+  }
+}
+
+export function setSession(s: Session | null) {
+  try {
+    if (s?.user?.email) localStorage.setItem(`${KEY}-email`, s.user.email)
     if (s) localStorage.setItem(KEY, JSON.stringify(s))
     else localStorage.removeItem(KEY)
   } catch {
@@ -85,29 +106,48 @@ export function setSession(s: { token: string; expires: number } | null) {
 export class AuthError extends Error {}
 
 async function call<T>(path: string, init: RequestInit = {}): Promise<T> {
-  if (!site.apiUrl) throw new Error('The dashboard needs your worker address (apiUrl in src/config.ts).')
+  if (!site.apiUrl) throw new Error(`The dashboard needs your API's address. Run npm run deploy, which fills VITE_API_URL in .env and rebuilds the site.`)
   const session = getSession()
-  const res = await fetch(`${site.apiUrl}${path}`, {
-    ...init,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(session ? { Authorization: `Bearer ${session.token}` } : {}),
-      ...(init.headers ?? {}),
-    },
-  })
+  let res: Response
+  try {
+    res = await fetch(`${site.apiUrl}${path}`, {
+      ...init,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(session ? { Authorization: `Bearer ${session.token}` } : {}),
+        ...(init.headers ?? {}),
+      },
+    })
+  } catch {
+    throw new Error(
+      `Can't reach the API at ${site.apiUrl}. Check VITE_API_URL in .env, that npm run deploy finished, and that ALLOWED_ORIGINS includes ${location.origin}.`,
+    )
+  }
   if (res.status === 401 && path !== '/admin/login') {
     setSession(null)
     throw new AuthError('Please sign in again.')
   }
+  const type = res.headers.get('Content-Type') ?? ''
   if (!res.ok) {
+    if (!type.includes('json')) {
+      throw new Error(
+        `The API at ${site.apiUrl} answered with an error page (${res.status}) instead of a message. Open that address in your browser to see its setup check.`,
+      )
+    }
     const body = (await res.json().catch(() => ({}))) as { error?: string }
-    throw new Error(body.error ?? `The server answered ${res.status}.`)
+    throw new Error(body.error ?? `The API answered ${res.status}.`)
   }
-  return (path.endsWith('.csv') ? res.text() : res.json()) as Promise<T>
+  if (path.endsWith('.csv')) return res.text() as Promise<T>
+  if (!type.includes('json')) {
+    throw new Error(`${site.apiUrl} doesn't look like your Santeria Tech API. Check VITE_API_URL in .env.`)
+  }
+  return res.json() as Promise<T>
 }
 
 export const api = {
-  login: (password: string) => call<{ token: string; expires: number }>('/admin/login', { method: 'POST', body: JSON.stringify({ password }) }),
+  login: (email: string, password: string) =>
+    call<Session>('/admin/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
+  logout: () => call<{ ok: true }>('/admin/logout', { method: 'POST' }),
   list: (params: { status?: string; q?: string; offset?: number }) => {
     const qs = new URLSearchParams()
     if (params.status && params.status !== 'all') qs.set('status', params.status)

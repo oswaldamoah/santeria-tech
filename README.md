@@ -1,28 +1,55 @@
 # Santeria Tech
 
-The website for Santeria Tech, a Houston reseller that buys used Apple devices. Visitors look up a model, see what you pay, add devices to a sell bag and send a purchase order. You get the order by email, it's saved to your database, and you manage it from a private dashboard.
+The website for Santeria Tech, a Houston reseller that buys used Apple devices. Visitors look up a model, see what you pay, add devices to a sell bag and send a purchase order. Each order is saved to your Neon database, emailed to you through Resend, and managed from a private dashboard.
 
-There are two parts:
+All your settings live in one file, `.env`, and one command publishes everything: `npm run deploy`.
 
-- **The website** (this folder). React 19, TypeScript, Vite and Motion, hosted free on GitHub Pages.
-- **The API** (`worker/`). A Cloudflare Worker that saves orders to Neon (Postgres), emails them through Resend, reads your prices from your Google Sheet and powers the dashboard. It holds all your secrets, so none of them end up in the website's code.
+## Get it running
+
+You need free accounts at **Neon** (database), **Resend** (email), **Cloudflare** (runs the private part, see below) and **GitHub** (hosts the site). Then:
+
+1. **Install.** In this folder: `npm install`
+2. **Fill in `.env`.** Copy `.env.example` to `.env`. Every line says where its value comes from. You only need two to start:
+   - `RESEND_API_KEY`: resend.com > **API Keys** > Create API Key
+   - `DATABASE_URL`: console.neon.tech > your project > **Connect**, the whole `postgresql://...` string
+
+   Add `PRICE_SHEET_URL` (your Google Sheet link) for live prices. Leave `SITE_URL`, `ALLOWED_ORIGINS` and `VITE_API_URL` empty: the deploy fills them in.
+3. **Create your dashboard login.** In Neon, open **SQL Editor**, paste `database/create-login.sql`, change the email, name and password on the `INSERT` line, and click **Run**.
+4. **Point GitHub Pages at the right branch.** In your GitHub repo: **Settings > Pages > Source: Deploy from a branch**, branch `gh-pages`, folder `/ (root)`. (The branch appears after your first deploy. If it isn't in the list yet, do step 5 first, then come back.)
+5. **Deploy.** `npm run deploy`. The first time, your browser opens to sign in to Cloudflare; click Allow. It then:
+   - uploads your private settings and publishes the API
+   - saves the API's address into `.env` for you
+   - checks the database, your login and your sheet, and tells you if anything's off
+   - builds the site and publishes it to GitHub Pages
+6. **Open `https://<username>.github.io/<repo>/#/admin`** and sign in.
+
+Changed something in `.env`, or edited the site? Run `npm run deploy` again. (`npm run deploy:site` only republishes the website; `npm run deploy:api` only the API.)
+
+To get order emails in every inbox, verify a domain you own in Resend (**Domains**, then add the DNS records it shows) and put an address on it in `FROM_EMAIL`. Until then, Resend only delivers to the email you signed up with.
+
+### Why there's a private part at all
+
+GitHub Pages only hosts files, and everything in the website's code can be read by anyone who opens it. Resend and Neon both need secret keys, and Resend refuses calls made straight from a browser ("Send the emails on the server-side to not expose your API keys"). If the keys sat in the website, anyone could send email as you or read and delete every seller's details.
+
+So the private part is a small API in `server/` that runs on Cloudflare's free tier. You don't manage it: it reads its settings from your `.env`, and `npm run deploy` publishes it. Only the `VITE_API_URL` line from `.env` goes into the public site.
 
 ## Run it on your computer
 
 ```bash
-npm install
 npm run dev
 ```
 
-Open http://localhost:5173. Until the API is connected, the order form offers an "email it to us instead" link and the site uses the built-in prices.
+Open http://localhost:5173. It uses the API you deployed (from `VITE_API_URL` in `.env`). Before the first deploy, the order form offers an "email it to us instead" link and the site uses the built-in prices.
+
+`npm run dev:api` runs the API on your computer too (at http://localhost:8787, using your real database). `npm run test:api` tests it against a temporary in-memory database.
 
 ## Change your details
 
-Everything a visitor sees about the business lives in `src/config.ts`: name, email, phone, address, the 12-hour promise and the "prices as of" month. The phone number is a placeholder (`(713) 555-0100`). Replace it, or set it to `''` to hide it everywhere. `apiUrl` is where your worker's address goes once it's deployed.
+Everything a visitor sees about the business lives in `src/config.ts`: name, email, phone, address, the 12-hour promise and the "prices as of" month. The phone number is a placeholder (`(713) 555-0100`). Replace it, or set it to `''` to hide it everywhere.
 
 ## Your price list (Santeria Tech Prices.xlsx)
 
-The spreadsheet is where you set prices. The website reads it through the worker, so you change a price in Google Sheets and the site shows it a minute later, with no code and no redeploy.
+The spreadsheet is where you set prices. The website reads it through the API, so you change a price in Google Sheets and the site shows it a minute later, with no code and no redeploy.
 
 ### The four tabs
 
@@ -61,12 +88,12 @@ The spreadsheet is where you set prices. The website reads it through the worker
 ### Connecting it
 
 1. Upload the file to Google Drive and open it with Google Sheets (you've done this).
-2. Click **Share** and set **General access** to **Anyone with the link: Viewer**. The worker needs this to read the sheet.
-3. Put the sheet's link in `worker/.dev.vars` as `PRICE_SHEET_URL`, then run `npm run secrets` in the `worker` folder (see "Set up the API").
+2. Click **Share** and set **General access** to **Anyone with the link: Viewer**. The API needs this to read the sheet.
+3. Put the sheet's link in `.env` as `PRICE_SHEET_URL`, then run `npm run deploy`.
 
-Keep **Site Prices** as the first tab. The worker reads the first tab and only passes ID, model, category, series, your price, Hot, Show and photos to the website. Your retail prices, buyer quotes and profit never reach the site.
+Keep **Site Prices** as the first tab. The API reads the first tab and only passes ID, model, category, series, your price, Hot, Show and photos to the website. Your retail prices, buyer quotes and profit never reach the site.
 
-Anyone who has the sheet's link itself can open the whole document, margins included. The link only lives in the worker's secrets, so don't post or share it. If you'd rather keep the document fully private, use **File > Share > Publish to web**, publish only the Site Prices tab as CSV, set General access back to **Restricted**, and use that publish link as `PRICE_SHEET_URL` instead.
+Anyone who has the sheet's link itself can open the whole document, margins included. The link only lives in your `.env` and the API's private settings, so don't post or share it. If you'd rather keep the document fully private, use **File > Share > Publish to web**, publish only the Site Prices tab as CSV, set General access back to **Restricted**, and use that publish link as `PRICE_SHEET_URL` instead.
 
 If the sheet can't be read, the site uses the last prices it loaded, then the built-in ones in `src/data/catalog.json`. That file is also where the photos' zoom and angle settings live.
 
@@ -78,39 +105,26 @@ The photos load straight from Apple's servers: product images from Apple Support
 - iPads, the MacBook Neo, AirPods Max, Vision Pro and the accessories only have one photo, because Apple doesn't publish a separate back view for them.
 - Apple hasn't released a regular iPhone 18 yet, so those cards use the iPhone 18 Pro photos for now.
 
-## Set up the API (Neon, Resend, Cloudflare)
-
-You need three free accounts: **Neon** (the database), **Resend** (email) and **Cloudflare** (runs the worker).
-
-1. **Neon.** Create a project at neon.tech. On the dashboard click **Connect** and copy the connection string (`postgresql://...`). The worker creates its tables the first time it runs.
-2. **Resend.** At resend.com, add a domain you own under **Domains** and add the DNS records it shows you. Then create an API key under **API Keys**. Until a domain is verified, Resend only delivers to the email you signed up with, and you can't send *from* a Gmail or atomicmail address.
-3. **Fill in the worker's settings.** In `worker/wrangler.toml`:
-   - `FROM_EMAIL`: an address on your verified domain, like `Santeria Tech Orders <orders@yourdomain.com>`
-   - `TO_EMAILS`: already `santeriatech@atomicmail.io,oswaldamoah00@gmail.com`
-   - `ALLOWED_ORIGINS`: replace `YOUR-GITHUB-USERNAME` with your GitHub username
-   - `SITE_URL`: your site's full address, for the "Open in dashboard" button in each email
-4. **Add your secrets.** In the `worker` folder, copy `.dev.vars.example` to `.dev.vars` and fill in `RESEND_API_KEY`, `DATABASE_URL`, `ADMIN_PASSWORD`, `SESSION_SECRET` and `PRICE_SHEET_URL`. `.dev.vars` is ignored by git, so it never goes to GitHub.
-5. **Deploy.**
-
-   ```bash
-   cd worker
-   npm install
-   npx wrangler login
-   npm run deploy      # prints your worker's address, like https://santeria-orders.<you>.workers.dev
-   npm run secrets     # uploads everything in .dev.vars to Cloudflare
-   ```
-
-Rather click through Cloudflare's website than run commands? Follow `worker/dashboard/README.md` instead of step 5: you paste one file into Cloudflare's editor and type the settings into its form.
-
-6. **Point the site at it.** Put the worker's address in `apiUrl` in `src/config.ts`, or add it as a GitHub repository variable named `VITE_API_URL`.
-
 Every purchase order is saved to Neon first, then emailed. If the email fails, the order is still saved and the dashboard flags it. The email's reply-to is the seller, so you can answer straight from your inbox.
-
-To try the worker locally with your real database: `npm run dev` in `worker/` (it reads `.dev.vars`). To run the worker's tests against a temporary in-memory database: `npm test`.
 
 ## The order dashboard
 
-Open `https://<your-site>/#/admin` and sign in with your `ADMIN_PASSWORD`. You stay signed in for 12 hours on that device. Search engines are told not to index it, and every request is checked by the worker.
+Open `https://<your-site>/#/admin` and sign in with the email and password you created below. You stay signed in for 12 hours on that device. Search engines are told not to index it, and every request is checked by the API.
+
+### Dashboard logins
+
+Logins are stored in your Neon database, with passwords hashed by Postgres (bcrypt), never as plain text.
+
+1. Open your project at neon.tech and click **SQL Editor**.
+2. Paste the contents of `database/create-login.sql`.
+3. On the `INSERT` line, change the email, name and password (keep the quotes).
+4. Click **Run**, then sign in at `/#/admin`.
+
+Running it again with the same email changes that password and signs that login out everywhere. The bottom of the file has short commands to add a second person, list logins, remove someone and sign everyone out. Each change to an order is recorded in its history with the name of whoever made it.
+
+If sign-in fails, the dashboard tells you why in plain words: wrong email or password, no logins created yet, the API address is wrong or unreachable, or a database setting is off. Opening your `VITE_API_URL` address in a browser shows the same checklist the deploy prints.
+
+### Using it
 
 - **The four numbers at the top:** orders waiting for a reply (turns red when any have passed your 12-hour promise), orders in progress, the total payout of open orders, and what you've paid out this month. Click the first two to filter.
 - **Filters and search:** filter by status, or search by name, email, phone, order number, model or your own notes. Press `/` to jump to search.
@@ -124,47 +138,40 @@ Open `https://<your-site>/#/admin` and sign in with your `ADMIN_PASSWORD`. You s
 - **Download** (the arrow at the top) saves every order as a CSV you can open in Excel or Google Sheets.
 - The list refreshes itself every 45 seconds and whenever you come back to the tab.
 
-## Put it on GitHub Pages
+## GitHub Pages
 
-Pick one of these two ways.
+`npm run deploy` publishes the built site to the `gh-pages` branch, so GitHub Pages must be set to **Deploy from a branch: gh-pages, / (root)** (step 4 above). No workflow file is needed.
 
-**A. Automatic (deploys every time you push)**
+The site appears at `https://<username>.github.io/<repo>/`. It uses hash URLs (`/#/sell/iphone`), so it works from any repository name and page refreshes never 404. For a custom domain, put the domain in `public/CNAME` and set it under **Settings > Pages**; the next deploy picks it up for `SITE_URL` and `ALLOWED_ORIGINS` if those are empty.
 
-1. Move `deploy.yml` from the project root into a folder called `.github/workflows/`, so the path is `.github/workflows/deploy.yml`. Or on GitHub's website click **Add file > Create new file**, name it `.github/workflows/deploy.yml`, and paste the file's contents.
-2. In the repository, open **Settings > Pages** and set **Source** to **GitHub Actions**. Missing this step is the usual reason a first deploy fails.
-3. Under **Settings > Secrets and variables > Actions > Variables**, add `VITE_API_URL` with your worker's address (unless you put it in `src/config.ts`).
-4. Push to `main` (or `master`), or open the **Actions** tab, pick "Deploy to GitHub Pages" and click **Run workflow**. If a run fails, click it to see which step went red.
-
-**B. From your computer, no workflow needed**
-
-1. In **Settings > Pages**, set **Source** to **Deploy from a branch**, branch `gh-pages`, folder `/ (root)`.
-2. Run `npm install` once, then `npm run deploy` whenever you want to publish.
-
-The site appears at `https://<username>.github.io/<repo>/`. It uses hash URLs (`/#/sell/iphone`), so it works from any repository name and page refreshes never 404. For a custom domain, put the domain in `public/CNAME`, set it under Settings > Pages, and add it to `ALLOWED_ORIGINS` and `SITE_URL` in the worker.
-
-Your `.xlsx` files are ignored by git on purpose: the price workbook contains your margins, and this repository may be public.
+Your `.env` and `.xlsx` files are ignored by git on purpose: one has your keys, the other your margins, and this repository may be public.
 
 ## Project layout
 
 ```
-src/
-  config.ts             business details and the worker's address
+.env.example            every setting, with where to find it (copy to .env)
+src/                    the website
+  config.ts             business details
   data/catalog.json     built-in products, prices and photo settings
   data/products.ts      categories, and applying prices from your sheet
   lib/bag.tsx           sell bag (saved in the visitor's browser)
   lib/order.ts          order form checks and sending
-  lib/priceSheet.ts     reads the sheet (shared with the worker)
+  lib/priceSheet.ts     reads the sheet (shared with the API)
   components/           nav, cards, photos, quantity stepper, search, bag sheet, motion helpers
   pages/                home, category, order, sent
   admin/                the order dashboard (its own bundle; shoppers never load it)
-worker/
-  src/index.ts          routes: orders, prices, dashboard
-  src/db.ts             Neon tables and queries
-  src/email.ts          the order email (Resend)
-  src/auth.ts           dashboard sign-in
-  src/prices.ts         prices from your sheet
+server/                 the private API (orders, emails, prices, dashboard)
+  index.ts              routes, plus the setup checklist at /
+  db.ts                 Neon tables and queries
+  email.ts              the order email (Resend)
+  auth.ts               dashboard sign-in
+  prices.ts             prices from your sheet, without your margins
   test/run.mjs          tests against an in-memory Postgres
-deploy.yml              GitHub Pages workflow (move into .github/workflows/)
+database/
+  create-login.sql      run in Neon's SQL Editor to create or reset a dashboard login
+  schema.sql            every table (the API also creates them by itself)
+scripts/deploy.mjs      what npm run deploy does
+wrangler.toml           tells Cloudflare where the API code is (no settings in it)
 ```
 
 ## Motion and accessibility

@@ -2,11 +2,9 @@ node_modules
 dist
 .env
 .env.local
-worker/node_modules
-worker/.wrangler
+.wrangler
 .DS_Store
-worker/.dev.vars
 .dev.vars
 # Your price workbook has your margins in it. Keep it out of the public repo.
 *.xlsx
-worker/test/.out
+server/test/.out

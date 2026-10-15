@@ -9,7 +9,7 @@ const CACHE_KEY = 'santeria-prices-v1'
 
 /** Fetches the latest prices from the Google Sheet, falling back to the last copy we saw. */
 async function loadPrices(): Promise<SheetRow[] | null> {
-  // Prefer the worker: it reads your sheet privately and strips out your margins.
+  // Prefer the API: it reads your sheet privately and strips out your margins.
   const url = site.apiUrl ? `${site.apiUrl}/prices` : csvUrl(site.priceSheetUrl)
   if (!url) return null
   const controller = new AbortController()

@@ -1,6 +1,6 @@
 /**
  * Reads the public "Site Prices" tab of your Google Sheet (published to the web as CSV).
- * Shared by the website and the email relay worker, so both always agree on prices.
+ * Shared by the website and the API, so both always agree on prices.
  */
 
 export type CategoryKey = 'iphone' | 'ipad' | 'mac' | 'watch' | 'airpods' | 'vision' | 'accessories'

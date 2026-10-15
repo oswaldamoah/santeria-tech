@@ -5,7 +5,7 @@ import { categoryById, formatPrice, searchProducts, type Product } from '../data
 import { useBag } from '../lib/bag'
 import { ProductImage } from './ProductImage'
 
-const SUGGESTIONS = ['iPhone 17 Pro', 'iPhone 16', 'MacBook Air M2', 'iPad Pro M4', 'Watch Ultra', 'AirPods Pro']
+const SUGGESTIONS = ['iPhone 18 Pro', 'iPhone 18', 'iPhone 17 Pro', 'iPhone 16', 'MacBook Air M2', 'iPad Pro M4', 'Watch Ultra', 'AirPods Pro']
 
 function Row({ product, active, onPick }: { product: Product; active: boolean; onPick: (p: Product, el: HTMLDivElement | null) => void }) {
   const ref = useRef<HTMLDivElement>(null)

@@ -1,11 +1,4 @@
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-  useSpring,
-  useTransform,
-} from 'motion/react'
+import { AnimatePresence, motion, useInView, useReducedMotion, useSpring } from 'motion/react'
 import { ChevronLeft, ChevronRight, Flame, Mail, MapPin, Phone, Plus } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -130,81 +123,107 @@ const avgDrop = Math.round(
   (LADDER.slice(1).reduce((sum, p, i) => sum + (LADDER[i].price - p.price) / LADDER[i].price, 0) / (LADDER.length - 1)) * 100,
 )
 
-function DecayRow({ index, active, progress }: { index: number; active: number; progress: ReturnType<typeof useSpring> }) {
+function DecayRow({ index, active, shown, onPick }: { index: number; active: number; shown: boolean; onPick: (i: number) => void }) {
   const p = LADDER[index]
   const max = LADDER[0].price
-  const n = LADDER.length
-  // Each bar fills as the scroll reaches it.
-  const start = (index / n) * 0.55
-  const fill = useTransform(progress, [start, start + 0.18], [0.02, p.price / max])
+  const on = index === active
   return (
-    <motion.div className="decay-row" animate={{ opacity: index === active ? 1 : 0.42 }} transition={{ duration: 0.3 }}>
+    <button
+      type="button"
+      className={`decay-row ${on ? 'is-active' : ''}`}
+      aria-pressed={on}
+      onClick={() => onPick(index)}
+      onPointerEnter={(e) => e.pointerType === 'mouse' && onPick(index)}
+      onFocus={() => onPick(index)}
+    >
       <span className="decay-row-name">{p.name.replace('iPhone ', '').replace(/\s*\(.*\)/, '')}</span>
       <span className="decay-bar">
-        <motion.span className="decay-bar-fill" style={{ display: 'block', scaleX: fill }} />
+        <motion.span
+          className="decay-bar-fill"
+          style={{ display: 'block' }}
+          initial={{ scaleX: 0.02 }}
+          animate={{ scaleX: shown ? p.price / max : 0.02 }}
+          transition={{ type: 'spring', bounce: 0, duration: 0.9, delay: shown ? 0.15 + index * 0.07 : 0 }}
+        />
       </span>
       <span className="decay-row-price">{formatPrice(p.price)}</span>
-    </motion.div>
+    </button>
   )
 }
 
 function Decay() {
-  const track = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({ target: track, offset: ['start 0.7', 'end end'] })
-  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.6 })
+  const ref = useRef<HTMLElement>(null)
+  const shown = useInView(ref, { amount: 0.35, once: true })
+  const reduce = useReducedMotion()
   const [active, setActive] = useState(0)
+  const [touched, setTouched] = useState(false)
   const big = useSpring(LADDER[0].price, { stiffness: 120, damping: 24 })
 
-  useMotionValueEvent(progress, 'change', (v) => {
-    const i = Math.min(LADDER.length - 1, Math.max(0, Math.floor(((v - 0.2) / 0.7) * LADDER.length)))
-    if (i !== active) {
-      setActive(i)
-      big.set(LADDER[i].price)
-    }
-  })
+  useEffect(() => {
+    big.set(LADDER[active].price)
+  }, [active, big])
+
+  // Once the chart is on screen, walk down the ladder by itself so the drop is felt,
+  // until the visitor taps or points at a model.
+  useEffect(() => {
+    if (!shown || touched || reduce) return
+    const t = setTimeout(() => setActive((i) => (i < LADDER.length - 1 ? i + 1 : i)), active === 0 ? 1600 : 1100)
+    return () => clearTimeout(t)
+  }, [shown, touched, reduce, active])
+
+  const pick = (i: number) => {
+    setTouched(true)
+    setActive(i)
+  }
+  const p = LADDER[active]
+  const drop = Math.round((1 - p.price / LADDER[0].price) * 100)
 
   return (
-    <section className="decay" data-dark>
-      <div className="decay-track" ref={track}>
-        <div className="decay-sticky">
-          <div className="wrap decay-grid">
-            <div className="decay-copy">
-              <Reveal>
-                <p className="eyebrow">Why sell now</p>
-                <h2 className="h1">
-                  Every year it waits,
-                  <br />
-                  <span className="gold-text">it's worth less.</span>
-                </h2>
-              </Reveal>
-              <Reveal delay={0.1}>
-                <p className="lede">
-                  On our own price list, each iPhone Pro Max is worth about {avgDrop}% less than the one that came after it.
-                  The phone in your drawer is losing value on that same curve.
-                </p>
-              </Reveal>
-              <div className="decay-big">
-                <MoneyValue mv={big} className="gold-text" />
-              </div>
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active}
-                  className="decay-big-label"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  What we pay for an {LADDER[active].name} today
-                </motion.div>
-              </AnimatePresence>
-            </div>
-            <div className="decay-bars">
-              {LADDER.map((_, i) => (
-                <DecayRow key={i} index={i} active={active} progress={progress} />
-              ))}
-            </div>
+    <section className="decay" data-dark ref={ref}>
+      <div className="wrap decay-grid">
+        <div className="decay-copy">
+          <Reveal>
+            <p className="eyebrow">Why sell now</p>
+            <h2 className="h1">
+              Every year it waits,
+              <br />
+              <span className="gold-text">it's worth less.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="lede">
+              On our own{' '}
+              <Link to="/sell/iphone" className="gold-link">
+                price list
+              </Link>
+              , each iPhone Pro Max is worth about {avgDrop}% less than the one that came after it. The phone in your drawer
+              is losing value on that same curve.
+            </p>
+          </Reveal>
+          <div className="decay-big">
+            <MoneyValue mv={big} className="gold-text" />
           </div>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={active}
+              className="decay-big-label"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+            >
+              What we pay for an {p.name} today
+              {drop > 0 && <span className="decay-drop"> · {drop}% less than the newest</span>}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <div className="decay-chart">
+          <div className="decay-bars" role="group" aria-label="What we pay for each iPhone Pro Max">
+            {LADDER.map((_, i) => (
+              <DecayRow key={i} index={i} active={active} shown={shown || !!reduce} onPick={pick} />
+            ))}
+          </div>
+          <p className="decay-hint">Tap or point at a model to see what it's worth.</p>
         </div>
       </div>
     </section>

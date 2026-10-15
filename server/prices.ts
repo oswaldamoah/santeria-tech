@@ -1,6 +1,6 @@
 /** Prices: the built-in catalog, updated from your Google Sheet when PRICE_SHEET_URL is set. */
-import catalog from '../../src/data/catalog.json'
-import { rowsFromCsv, sheetSources, type SheetRow } from '../../src/lib/priceSheet'
+import catalog from '../src/data/catalog.json'
+import { rowsFromCsv, sheetSources, type SheetRow } from '../src/lib/priceSheet'
 
 export interface Priced {
   id: string
@@ -33,7 +33,7 @@ export async function sheetRows(link: string | undefined): Promise<SheetRow[] | 
   return memo?.rows ?? null
 }
 
-/** Only the fields the public site needs. Retail, buyer quotes and profit never leave the worker. */
+/** Only the fields the public site needs. Retail, buyer quotes and profit never leave the API. */
 export function publicRows(rows: SheetRow[]) {
   return rows.map(({ id, name, category, series, price, hot, show, image, back }) => ({
     id,

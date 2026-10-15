@@ -1,6 +1,6 @@
 import { neon } from '@neondatabase/serverless'
 
-/** The tiny slice of a Postgres client the worker needs. Neon in production, PGlite in tests. */
+/** The tiny slice of a Postgres client the API needs. Neon in production, PGlite in tests. */
 export interface Db {
   query<T = Record<string, unknown>>(text: string, params?: unknown[]): Promise<T[]>
 }
@@ -13,7 +13,9 @@ export function neonDb(url: string): Db {
 export const STATUSES = ['new', 'contacted', 'scheduled', 'received', 'paid', 'cancelled'] as const
 export type Status = (typeof STATUSES)[number]
 
+// Keep in sync with database/schema.sql (the copy you can run yourself in Neon's SQL Editor).
 const SCHEMA = [
+  `CREATE EXTENSION IF NOT EXISTS pgcrypto`,
   `CREATE TABLE IF NOT EXISTS orders (
     id BIGSERIAL PRIMARY KEY,
     code TEXT UNIQUE NOT NULL,
@@ -53,11 +55,26 @@ const SCHEMA = [
     detail TEXT NOT NULL DEFAULT ''
   )`,
   `CREATE INDEX IF NOT EXISTS order_events_order_idx ON order_events (order_id, at)`,
+  `CREATE TABLE IF NOT EXISTS admin_users (
+    id BIGSERIAL PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL DEFAULT '',
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    last_login_at TIMESTAMPTZ
+  )`,
+  `CREATE TABLE IF NOT EXISTS admin_sessions (
+    token_hash TEXT PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES admin_users(id) ON DELETE CASCADE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    expires_at TIMESTAMPTZ NOT NULL
+  )`,
+  `CREATE INDEX IF NOT EXISTS admin_sessions_user_idx ON admin_sessions (user_id)`,
 ]
 
 let ready: Promise<void> | null = null
 
-/** Creates the tables the first time this worker instance talks to the database. */
+/** Creates the tables the first time this API instance talks to the database. */
 export function ensureSchema(db: Db) {
   ready ??= (async () => {
     for (const statement of SCHEMA) await db.query(statement)
@@ -185,6 +202,7 @@ export async function updateOrder(
   db: Db,
   code: string,
   patch: { status?: Status; final_total?: number | null; admin_notes?: string },
+  by = '',
 ) {
   const [current] = await db.query<{ id: string; status: string; final_total: number | null; admin_notes: string }>(
     `SELECT id, status, final_total::float8 AS final_total, admin_notes FROM orders WHERE code = $1`,
@@ -198,6 +216,7 @@ export async function updateOrder(
   }
   if (patch.admin_notes !== undefined && patch.admin_notes !== current.admin_notes) events.push(['note', 'Notes updated'])
   if (!events.length) return true
+  if (by) for (const e of events) e[1] = `${e[1]} (${by})`
 
   await db.query(
     `WITH u AS (
@@ -232,4 +251,49 @@ export async function exportOrders(db: Db) {
                  FROM order_items it WHERE it.order_id = o.id), '') AS items
      FROM orders o ORDER BY o.created_at DESC`,
   )
+}
+
+/* ---------------- Dashboard logins ---------------- */
+
+export interface AdminUser {
+  id: string
+  email: string
+  name: string
+}
+
+/** Checks an email and password. Postgres (pgcrypto) compares the bcrypt hash, so no password is stored in plain text. */
+export async function verifyLogin(db: Db, email: string, password: string): Promise<AdminUser | null> {
+  const [user] = await db.query<AdminUser>(
+    `UPDATE admin_users SET last_login_at = now()
+     WHERE lower(email) = lower($1) AND password_hash = crypt($2, password_hash)
+     RETURNING id::text, email, name`,
+    [email.trim(), password],
+  )
+  return user ?? null
+}
+
+export async function countAdmins(db: Db) {
+  const [r] = await db.query<{ n: number }>(`SELECT count(*)::int AS n FROM admin_users`)
+  return r?.n ?? 0
+}
+
+export async function createSession(db: Db, userId: string, tokenHash: string, hours: number) {
+  await db.query(`DELETE FROM admin_sessions WHERE expires_at < now()`)
+  await db.query(
+    `INSERT INTO admin_sessions (token_hash, user_id, expires_at) VALUES ($1, $2, now() + make_interval(hours => $3))`,
+    [tokenHash, userId, hours],
+  )
+}
+
+export async function sessionUser(db: Db, tokenHash: string): Promise<AdminUser | null> {
+  const [user] = await db.query<AdminUser>(
+    `SELECT u.id::text, u.email, u.name FROM admin_sessions s JOIN admin_users u ON u.id = s.user_id
+     WHERE s.token_hash = $1 AND s.expires_at > now()`,
+    [tokenHash],
+  )
+  return user ?? null
+}
+
+export async function endSession(db: Db, tokenHash: string) {
+  await db.query(`DELETE FROM admin_sessions WHERE token_hash = $1`, [tokenHash])
 }

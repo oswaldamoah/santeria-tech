@@ -69,6 +69,34 @@
   margin-right: 6px;
 }
 
+.adm-user {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-2);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--fill, rgba(127, 127, 127, 0.12));
+  max-width: 18ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .adm-user {
+    display: none;
+  }
+}
+
+.adm-login-card .adm-field {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.adm-login-card .adm-field input {
+  display: block;
+}
+
 .adm-main {
   max-width: 1320px;
   margin: 0 auto;

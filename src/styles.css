@@ -863,18 +863,7 @@ textarea {
   position: relative;
   background: var(--ink);
   color: var(--ink-text);
-}
-
-.decay-track {
-  height: 260vh;
-}
-
-.decay-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
+  padding: clamp(88px, 12vw, 150px) 0;
   overflow: hidden;
 }
 
@@ -913,20 +902,56 @@ textarea {
 .decay-bars {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
 }
 
 .decay-row {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr) 64px;
   align-items: center;
   gap: 14px;
+  padding: 3px 8px;
+  margin: 0 -8px;
+  border-radius: 14px;
   font-size: 0.9rem;
+  opacity: 0.55;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.decay-row:hover {
+  opacity: 0.8;
+}
+
+.decay-row.is-active {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.decay-row:focus-visible {
+  outline: 2px solid var(--gold-1);
+  outline-offset: 2px;
+}
+
+.decay-row:active {
+  transform: scale(0.99);
 }
 
 .decay-row-name {
   color: var(--ink-text-2);
   white-space: nowrap;
+}
+
+.decay-row.is-active .decay-row-name {
+  color: var(--ink-text);
 }
 
 .decay-bar {
@@ -949,21 +974,43 @@ textarea {
   font-variant-numeric: tabular-nums;
 }
 
+.decay-drop {
+  color: var(--gold-2);
+}
+
+.decay-hint {
+  margin: 14px 0 0;
+  font-size: 0.82rem;
+  color: var(--ink-text-2);
+}
+
+.gold-link {
+  color: var(--gold-1);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--gold-2);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.gold-link:hover {
+  color: var(--gold-2);
+  text-decoration-color: var(--gold-1);
+}
+
 @media (max-width: 820px) {
-  .decay-track {
-    height: auto;
-  }
-  .decay-sticky {
-    position: relative;
-    height: auto;
-    padding: 96px 0;
-  }
   .decay-grid {
     grid-template-columns: 1fr;
   }
   .decay-row {
     grid-template-columns: 78px minmax(0, 1fr) 56px;
     font-size: 0.82rem;
+    padding: 4px 6px;
+    margin: 0 -6px;
+  }
+  .decay-bar {
+    height: 30px;
   }
 }
 
@@ -2156,14 +2203,6 @@ textarea {
   .hot-flame,
   .hot-eyebrow svg {
     animation: none;
-  }
-  .decay-track {
-    height: auto;
-  }
-  .decay-sticky {
-    position: relative;
-    height: auto;
-    padding: 96px 0;
   }
 }
 

@@ -5,12 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:api": "wrangler dev",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc -b",
-    "deploy": "npm run build && gh-pages -d dist --dotfiles"
+    "typecheck": "tsc -b && tsc -p server",
+    "deploy": "node scripts/deploy.mjs",
+    "deploy:site": "node scripts/deploy.mjs --site",
+    "deploy:api": "node scripts/deploy.mjs --api",
+    "test:api": "node server/test/run.mjs"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
     "lucide-react": "^1.57.0",
     "motion": "^14.2.0",
     "react": "^19.3.1",
@@ -18,12 +23,15 @@
     "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.10",
     "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
+    "esbuild": "^0.28.2",
     "gh-pages": "^6.3.0",
     "typescript": "^7.0.2",
-    "vite": "^8.3.4"
+    "vite": "^8.3.4",
+    "wrangler": "^4.151.0"
   }
 }
