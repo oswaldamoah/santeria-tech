@@ -1,5 +1,5 @@
 import { AnimatePresence, MotionConfig, motion } from 'motion/react'
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { HashRouter, Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import { BagSheet } from './components/BagSheet'
 import { AddedToast, FlyLayer } from './components/FlyLayer'
@@ -44,18 +44,35 @@ function Pages() {
   )
 }
 
+// The dashboard is its own bundle, so shoppers never download it.
+const AdminApp = lazy(() => import('./admin/AdminApp'))
+
+function Shell() {
+  const { pathname } = useLocation()
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+    return (
+      <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--gray)' }} />}>
+        <AdminApp />
+      </Suspense>
+    )
+  }
+  return (
+    <BagProvider>
+      <Nav />
+      <Pages />
+      <Footer />
+      <BagSheet />
+      <FlyLayer />
+      <AddedToast />
+    </BagProvider>
+  )
+}
+
 export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <HashRouter>
-        <BagProvider>
-          <Nav />
-          <Pages />
-          <Footer />
-          <BagSheet />
-          <FlyLayer />
-          <AddedToast />
-        </BagProvider>
+        <Shell />
       </HashRouter>
     </MotionConfig>
   )

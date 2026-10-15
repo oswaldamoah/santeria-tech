@@ -425,12 +425,20 @@ textarea {
 
 .hero {
   position: relative;
+  /* Sits above the next section so the price search dropdown can hang over it. */
+  z-index: 10;
   background: var(--ink);
   color: var(--ink-text);
-  overflow: hidden;
   padding: clamp(64px, 11vw, 140px) 0 clamp(72px, 10vw, 128px);
   margin-top: calc(var(--nav-h) * -1);
   padding-top: calc(var(--nav-h) + clamp(56px, 10vw, 128px));
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .hero-glow {

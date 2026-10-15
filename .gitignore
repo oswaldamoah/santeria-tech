@@ -5,3 +5,8 @@ dist
 worker/node_modules
 worker/.wrangler
 .DS_Store
+worker/.dev.vars
+.dev.vars
+# Your price workbook has your margins in it. Keep it out of the public repo.
+*.xlsx
+worker/test/.out

@@ -44,8 +44,8 @@ export function validate(f: OrderForm, lines: BagLine[]) {
 
 /** Sends the purchase order to the email relay. Throws with a readable message on failure. */
 export async function sendOrder(orderId: string, f: OrderForm, lines: BagLine[]) {
-  if (!site.orderEndpoint) throw new Error('The order form is not connected yet.')
-  const res = await fetch(site.orderEndpoint, {
+  if (!site.apiUrl) throw new Error('The order form is not connected yet.')
+  const res = await fetch(`${site.apiUrl}/orders`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

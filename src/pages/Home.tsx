@@ -10,7 +10,7 @@ import { ChevronLeft, ChevronRight, Flame, Mail, MapPin, Phone, Plus } from 'luc
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { site, telHref } from '../config'
-import { categories, formatPrice, hotProducts, productById, products, topPriceIn, type Category } from '../data/products'
+import { categories, coverFor, formatPrice, hotProducts, productById, products, topPriceIn, type Category } from '../data/products'
 import { PriceSearch } from '../components/PriceSearch'
 import { ProductCard } from '../components/ProductCard'
 import { ProductImage } from '../components/ProductImage'
@@ -66,12 +66,14 @@ function Ticker() {
 function Hero() {
   return (
     <section className="hero" data-dark>
-      <motion.div
-        className="hero-glow"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
-      />
+      <div className="hero-bg">
+        <motion.div
+          className="hero-glow"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
+        />
+      </div>
       <div className="wrap hero-inner">
         <motion.p
           className="eyebrow"
@@ -271,8 +273,9 @@ function HotRail() {
 /* ---------- Categories ---------- */
 
 function CategoryTile({ c, className = '', delay = 0 }: { c: Category; className?: string; delay?: number }) {
-  const cover = productById.get(c.cover)!
+  const cover = coverFor(c)
   const [hover, setHover] = useState(false)
+  if (!cover) return null
   return (
     <motion.div
       className={`cat-tile ${className}`}

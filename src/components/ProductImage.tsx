@@ -25,7 +25,8 @@ export const ProductImage = forwardRef<HTMLDivElement, Props>(function ProductIm
   const [broken, setBroken] = useState(false)
   const [back, setBack] = useState(false)
   const pointer = useRef<string>('mouse')
-  const canFlip = !!(flippable && product.back && !broken)
+  const missing = broken || !product.image
+  const canFlip = !!(flippable && product.back && !missing)
   const front = imageUrl(product.image)
 
   const style = {
@@ -37,7 +38,7 @@ export const ProductImage = forwardRef<HTMLDivElement, Props>(function ProductIm
     <div
       ref={ref}
       className={`thumb ${canFlip ? 'can-flip' : ''} ${className}`}
-      data-src={broken ? undefined : front}
+      data-src={missing ? undefined : front}
       style={style}
       onPointerDown={(e) => (pointer.current = e.pointerType)}
       onPointerEnter={(e) => canFlip && e.pointerType === 'mouse' && setBack(true)}
@@ -54,7 +55,7 @@ export const ProductImage = forwardRef<HTMLDivElement, Props>(function ProductIm
       aria-label={canFlip ? `${product.name}: show ${back ? 'front' : 'back'}` : undefined}
       aria-pressed={canFlip ? back : undefined}
     >
-      {broken ? (
+      {missing ? (
         <Glyph category={product.category} />
       ) : (
         <motion.img
@@ -100,7 +101,7 @@ export const ProductImage = forwardRef<HTMLDivElement, Props>(function ProductIm
           {back ? 'Tap for front' : 'Tap for back'}
         </span>
       )}
-      {!loaded && !broken && <div className="thumb-shimmer" aria-hidden />}
+      {!loaded && !missing && <div className="thumb-shimmer" aria-hidden />}
     </div>
   )
 })

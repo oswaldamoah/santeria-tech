@@ -1,12 +1,17 @@
 name = "santeria-orders"
 main = "src/index.ts"
 compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
 
 [vars]
+# Must be an address on a domain you've verified in Resend.
 FROM_EMAIL = "Santeria Tech Orders <orders@YOUR-VERIFIED-DOMAIN.com>"
-TO_EMAILS = "santeriatech@atomicmail.io,orders.santeriatech@yopmail.com"
+TO_EMAILS = "santeriatech@atomicmail.io,oswaldamoah00@gmail.com"
 # Your GitHub Pages origin (no path), plus localhost for testing.
 ALLOWED_ORIGINS = "https://YOUR-GITHUB-USERNAME.github.io,http://localhost:5173"
+# Your site's full address, used for the "Open in dashboard" button in emails.
+SITE_URL = "https://YOUR-GITHUB-USERNAME.github.io/santeria-tech/"
 
-# Set the API key as a secret, never here:
-#   npx wrangler secret put RESEND_API_KEY
+# Secrets never go in this file. Put them in .dev.vars (see .dev.vars.example), then run:
+#   npm run secrets
+# RESEND_API_KEY, DATABASE_URL, ADMIN_PASSWORD, SESSION_SECRET, PRICE_SHEET_URL
