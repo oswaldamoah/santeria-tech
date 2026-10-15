@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Santeria Tech · Ad Pack</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Inter,system-ui,sans-serif;background:#f5f5f7;color:#1d1d1f;padding:24px}
+header{max-width:1240px;margin:0 auto 20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+h1{font-size:28px;letter-spacing:-.03em}header p{color:#6e6e73;font-size:14px}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+button{font-family:inherit;cursor:pointer}
+nav button{border:0;background:#e8e8ed;padding:8px 16px;border-radius:99px;font-weight:600;font-size:13px}
+nav button.on{background:#1d1d1f;color:#fff}
+#g{max-width:1240px;margin:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px 20px}
+.d{display:flex;gap:8px;margin-top:10px}.d button{flex:1;border:0;background:#0071e3;color:#fff;border-radius:12px;padding:10px;font-weight:700;font-size:13px}.d button+button{background:#1d1d1f}
+.d button:disabled{opacity:.5}
+.ad{position:relative;aspect-ratio:4/5;border-radius:28px;padding:26px;display:flex;flex-direction:column;overflow:hidden;transition:.3s;box-shadow:0 10px 30px #0002}
+.w:hover .ad:not(.cap){transform:translateY(-4px)}
+.top{z-index:2;height:44px}.lg{height:44px;width:44px;border-radius:11px;box-shadow:0 0 0 1px #ffffff33,0 4px 12px #0003;display:block}
+.ad h2{font-size:clamp(30px,3.4vw,40px);line-height:1;letter-spacing:-.045em;margin:16px 0 8px;z-index:2;font-weight:800}
+.ad h2 em{font-style:normal;background:linear-gradient(90deg,#ffd60a,#ff5a1f);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ad p{font-size:14px;opacity:.85;line-height:1.35;z-index:2;max-width:92%}
+.pic{flex:1;display:grid;place-items:center;min-height:0;position:relative;margin:6px 0}
+.pic:before{content:"";position:absolute;width:75%;aspect-ratio:1;border-radius:50%;background:var(--g,#fff);opacity:.95}
+.pic img{position:relative;max-height:100%;max-width:88%;object-fit:contain;filter:drop-shadow(0 18px 20px #0004);animation:fl 4s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-8px) rotate(2deg)}}
+.price{font-weight:800;font-size:22px;letter-spacing:-.03em;z-index:2}
+.hide{display:none}
+.dark{background:#000;color:#fff;--g:radial-gradient(#3a3a3f,#1a1a1d)}
+.light{background:#fff;--g:radial-gradient(#e8f1ff,#cfe3ff)}
+.blue{background:linear-gradient(160deg,#0071e3,#00c6ff);color:#fff;--g:radial-gradient(#fff,#cfe9ff)}
+.yel{background:#ffd60a;--g:radial-gradient(#fff,#ffe97a)}.yel h2 em,.org h2 em{background:none;color:#d93c12}
+.org{background:linear-gradient(160deg,#ff2d1f,#ffb000);color:#fff;--g:radial-gradient(#fff,#ffe1b0)}.org h2 em{color:#1d1d1f}
+.mint{background:linear-gradient(160deg,#07090a,#0b3d2a);color:#fff;--g:radial-gradient(#7dffb8,#0b3d2a)}
+.meme{background:#fff;color:#000;--g:radial-gradient(#ffd60a,#ff9f0a)}.meme h2{font-family:Impact,"Arial Black",sans-serif;text-transform:uppercase;letter-spacing:-.01em;font-weight:900}.meme h2 em{background:none;color:#e0001a}
+/* parodies */
+.kfc{background:repeating-linear-gradient(90deg,#e4002b 0 22px,#fff 22px 44px);color:#fff;--g:radial-gradient(#fff,#ffd9de)}
+.kfc h2,.kfc p,.kfc .price{background:#e4002b;padding:6px 10px;border-radius:8px;width:fit-content;font-family:Georgia,serif;font-style:italic}.kfc h2 em{background:none;color:#fff;text-decoration:underline}
+.spider{background:radial-gradient(circle at 0 0,transparent 0 40px,#ffffff22 41px 42px,transparent 43px 80px,#ffffff22 81px 82px,transparent 83px 120px,#ffffff22 121px 122px,transparent 123px),linear-gradient(160deg,#c4001d,#1b2a8f);color:#fff;--g:radial-gradient(#fff,#ffb3bd)}
+.duo{background:#58cc02;color:#fff;--g:radial-gradient(#fff,#d7ffb8)}.duo h2{color:#fff}.duo h2 em{background:none;color:#1d1d1f}
+.wanted{background:#e9d5a1;color:#3b2a14;--g:radial-gradient(#f6e8c0,#c9a96a);border:10px double #3b2a14}.wanted h2{font-family:Georgia,serif;text-transform:uppercase}.wanted h2 em{background:none;color:#a3150a}
+.nflx{background:#141414;color:#fff;--g:radial-gradient(#3a0a0e,#141414)}.nflx h2 em{background:none;color:#e50914}
+.nike{background:#fa5400;color:#111;--g:radial-gradient(#fff,#ffd2b8)}.nike h2{text-transform:uppercase;font-style:italic;font-weight:900}.nike h2 em{background:none;color:#fff}
+.tind{background:linear-gradient(160deg,#fd267a,#ff7854);color:#fff;--g:radial-gradient(#fff,#ffd0c2)}.tind h2 em{background:none;color:#fff;text-decoration:underline}
+.poke{background:linear-gradient(#e53935 0 50%,#fff 50%);color:#111;--g:radial-gradient(#fff,#ffe082)}.poke h2{color:#fff;text-shadow:3px 3px 0 #1a3fa5;font-weight:900}.poke h2 em{background:none;color:#ffcb05;-webkit-text-stroke:1px #1a3fa5}.poke p{color:#fff}.poke .price{color:#111;position:absolute;bottom:22px;left:26px}
+.mono{background:#cde6d0;color:#d4001a;border:12px solid #d4001a;--g:radial-gradient(#fff,#f5f5f5)}.mono h2{text-transform:uppercase;font-family:Georgia,serif}.mono h2 em{background:none;color:#1d1d1f}
+.err{background:#0078d7;color:#fff;--g:radial-gradient(#fff,#cfe9ff)}.err h2{font-weight:300;font-size:34px}.err h2 em{background:none;color:#fff;font-weight:800}
+.ios{background:linear-gradient(160deg,#1c1c1e,#3a3a3c);color:#fff;--g:radial-gradient(#ff453a,#8b1a14)}.ios h2 em{background:none;color:#ff453a}
+.sbux{background:#00704a;color:#fff;--g:radial-gradient(#fff,#d4e9e2)}.sbux h2 em{background:none;color:#cba258}
+</style></head><body>
+<header><div><h1>Santeria Tech · Ad Pack</h1><p>Download each ad as a 1080×1350 PNG or a looping video</p></div>
+<nav id="n"></nav><button id="all" style="border:0;background:#0071e3;color:#fff;border-radius:99px;padding:9px 18px;font-weight:700">Download all PNG</button></header><main id="g"></main>
+<script>
+const L="https://santeriatech.vercel.app/logo-mark.png",I=i=>`https://cdsassets.apple.com/content/services/pub/image?productid=${i}&size=640x640`,
+MBP="https://cdsassets.apple.com/live/7WUAS350/images/macbook-pro/macbook-pro-14in-m5-pro-m5-max.png",
+MBA="https://cdsassets.apple.com/live/7WUAS350/images/macbook-air/macbook-air-13in-m5-colors.png",
+P17=I(301246),P18=I(301317),AIR=I(301244),P17p=I(301245),P16=I(301048),VP=I(301269),IPAD=I(301270),WU=I("PL653"),APM=I(301293),APP=I(301265);
+// [theme, category, headline, sub, img, price]
+const A=[
+["dark","Core","Don't ship it.<br><em>Sell it.</em>","Got a postpaid Apple box? Skip the shipping label. Get paid instead.",P18,"Up to $2,448"],
+["blue","Core","We buy <em>any</em><br>Apple product.","iPhone, Mac, iPad, Watch, AirPods, Vision Pro. If it glows, it pays.",MBP,""],
+["org","Core","Postpaid<br>box? <em>Don't ship.</em>","Send us a purchase order instead. We reply in 12 hours.",AIR,""],
+["light","Core","$1,683 for a<br><em>Netflix machine?</em>","Your MacBook Pro 14\" (M5 Pro / Max) is worth real money.",MBP,"$1,683"],
+["blue","Core","Offer in<br><em>12 hours.</em><br>Or less.","Look up your model. Send a purchase order. Done.",APP,""],
+["dark","Core","The Apple gear<br>we want <em>most.</em>","iPhone 18 Pro, MacBook Air M2, iPad Pro M4, Watch Ultra.",MBA,""],
+["yel","Houston","Houston,<br>we have a <em>payout.</em>","Local buyers. Straight answers. Offer back within 12 hours.",P17p,""],
+["org","Houston","Don't <em>mail</em> it.<br>Meet Houston's<br>Apple buyer.","Santeria Tech. Sell your Apple gear without the post office.",P17,""],
+["light","Houston","Y'all got an<br><em>old iPhone?</em>","Houston pays. Fast, fair and local.",P16,""],
+["meme","Memes","Your iPhone<br>is the <em>prize.</em>","Congratulations 🏆 You've been holding a $1,530 trophy in your drawer.",P17,"$1,530"],
+["meme","Memes","Me: \"I'll sell it later\"<br><em>The iPhone: 📉</em>","Apple gear loses value daily. Cash it before it ages like milk.",P16,""],
+["meme","Memes","POV: your old iPhone<br>just paid for the <em>new one</em>","Trade up without the trade-in lowball.",IPAD,""],
+["meme","Memes","Drawer iPhone:<br><em>\"Am I a joke to you?\"</em>","Yes. Sell it. Get $$$. Free the iPhone.",I(301002),""],
+["mint","Memes","Touch grass.<br><em>We'll take the headset.</em>","Apple Vision Pro (M5) collecting dust? We pay $2,142.",VP,"$2,142"],
+["yel","Memes","$2,448<br>for an <em>iPhone??</em>","Yes. iPhone Duo 2TB. Look up yours.",P18,""],
+["meme","Memes","Nobody:<br>Your iPhone: <em>\"1% battery 🪫\"</em>","Sell it before it dies for good.",P17p,""],
+["dark","Memes","Your AirPods Max<br>are <em>not</em> a necklace.","Turn them into cash. Fast, fair, local.",APM,""],
+["kfc","Parodies","iPhone<br><em>lickin' good.</em>","A bucket of cash for your old Apple gear. Yours in 12 hours.",P17,"Sell yours"],
+["spider","Parodies","With great iPhone<br>comes great<br><em>resell value.</em>","Your friendly neighborhood Apple buyer. Swing by Santeria Tech.",P18,""],
+["duo","Parodies","Sell your iPhone.<br><em>Don't make us come get it.</em>","Duolingo owl energy. Daily reminders until it's sold.",P16,""],
+["wanted","Parodies","Wanted:<br><em>Your iPhone</em>","Dead or alive. Reward: up to $1,530. Santeria Tech, Houston.",P17,"Reward $1,530"],
+["nflx","Parodies","Are you still<br><em>using this iPhone?</em>","Continue watching? Or sell it for cash.",P17p,""],
+["nike","Parodies","Just<br><em>sell it.</em>","Santeria Tech. Cash for Apple gear.",AIR,""],
+["tind","Parodies","It's a match!<br>You + <em>Santeria Tech</em>","Swipe right on a fair offer for your iPhone.",P18,""],
+["poke","Parodies","Gotta<br><em>sell 'em all!</em>","iPhones, iPads, Macs, Watches, AirPods. Catch the cash.",P17,"Up to $2,448"],
+["mono","Parodies","Go to Santeria.<br><em>Collect $200+.</em>","Do not pass the post office. Do not ship your iPhone.",P16,""],
+["err","Parodies","Your drawer<br>has <em>stopped working.</em>","Too many old iPhones. Sell them to free up space.",MBP,""],
+["ios","Parodies","Storage<br><em>almost full.</em>","of old Apple gear. Manage it with cash.",P17p,""],
+["sbux","Parodies","One venti<br><em>cash offer.</em>","For your iPhone, iPad or MacBook. No foam.",IPAD,""],
+["nflx","Parodies","One more thing.<br><em>Your iPhone is worth money.</em>","Keynote voice. Sell it.",VP,""]
+],g=document.getElementById("g"),n=document.getElementById("n");
+g.innerHTML=A.map(a=>`<div class="w" data-c="${a[1]}"><article class="ad ${a[0]}"><div class="top"><img class="lg" src="${L}" alt="" crossorigin="anonymous" onerror="this.style.display='none'"></div><h2>${a[2]}</h2><p>${a[3]}</p><div class="pic"><img src="${a[4]}" alt="" crossorigin="anonymous" onerror="this.style.display='none'"></div>${a[5]?`<div class="price">${a[5]}</div>`:""}</article><div class="d"><button>Download PNG</button><button>Download video</button></div></div>`).join("");
+// preload images as data URLs so exporting works
+(async()=>{const c={};for(const im of g.querySelectorAll("img")){const s=im.src;try{c[s]??=await fetch(s).then(r=>r.blob()).then(b=>new Promise(r=>{const f=new FileReader;f.onload=()=>r(f.result);f.readAsDataURL(b)}));im.src=c[s]}catch(e){}}})();
+const cap=async(el,t)=>{const im=el.querySelector(".pic img");el.classList.add("cap");im.style.animation="none";im.style.transform=`translateY(${-8*Math.sin(t*6.283)}px) rotate(${2*Math.sin(t*6.283)}deg)`;const k=await html2canvas(el,{scale:1080/el.offsetWidth,useCORS:true,backgroundColor:null});el.classList.remove("cap");im.style.animation=im.style.transform="";return k},
+save=(b,name)=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;a.click()},
+png=async(w,i)=>{const k=await cap(w.querySelector(".ad"),0);return new Promise(r=>k.toBlob(b=>{save(b,`santeria-ad-${i+1}.png`);r()}))},
+vid=async(w,i,b)=>{const N=24,F=[];for(let j=0;j<N;j++){b.textContent=`Rendering ${j+1}/${N}`;F.push(await cap(w.querySelector(".ad"),j/N))}
+const c=document.createElement("canvas");c.width=F[0].width;c.height=F[0].height;const x=c.getContext("2d"),m=MediaRecorder.isTypeSupported("video/mp4")?"video/mp4":"video/webm",r=new MediaRecorder(c.captureStream(12),{mimeType:m,videoBitsPerSecond:12e6}),ch=[];r.ondataavailable=e=>ch.push(e.data);r.start();b.textContent="Encoding…";
+for(let l=0;l<N*3;l++){x.drawImage(F[l%N],0,0);await new Promise(z=>setTimeout(z,1e3/12))}
+await new Promise(z=>{r.onstop=z;r.stop()});save(new Blob(ch,{type:m}),`santeria-ad-${i+1}.${m.slice(6,9)}`)};
+g.querySelectorAll(".w").forEach((w,i)=>{const[p,v]=w.querySelectorAll("button");
+p.onclick=async()=>{p.disabled=1;await png(w,i);p.disabled=0};
+v.onclick=async()=>{v.disabled=1;const t=v.textContent;await vid(w,i,v);v.textContent=t;v.disabled=0}});
+document.getElementById("all").onclick=async e=>{const b=e.target,t=b.textContent;for(const[i,w]of[...g.querySelectorAll(".w")].entries())if(!w.classList.contains("hide")){b.textContent=`Saving ${i+1}/${A.length}`;await png(w,i)}b.textContent=t};
+["All",...new Set(A.map(a=>a[1]))].forEach((k,i)=>{const b=document.createElement("button");b.textContent=k;b.className=i?"":"on";b.onclick=()=>{n.querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");g.querySelectorAll(".w").forEach(a=>a.classList.toggle("hide",k!="All"&&a.dataset.c!=k))};n.append(b)});
+</script></body></html>
