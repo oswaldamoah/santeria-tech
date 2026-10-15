@@ -1,0 +1,10 @@
+node_modules
+dist
+.env
+.env.local
+.wrangler
+.DS_Store
+.dev.vars
+# Your price workbook has your margins in it. Keep it out of the public repo.
+*.xlsx
+server/test/.out
